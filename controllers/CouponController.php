@@ -51,14 +51,15 @@ class CouponController extends Controller {
     public function actionFilter($choice, $vendor_id, $category_id) {
         if (Yii::$app->request->isAjax) { 
             $coupons = Coupon::getCouponsBasedOnFilters($choice, $vendor_id, $category_id);
-            // 
+            
             // This is a JSON Approach Blocker:
-            // 
-            // 
-            // header('Content-Type: application/json');
-            // $data = array_map(create_function('$m','return $m->getAttributes(array(\'CouponID\',\'Description\', \'IsDeal\', \'CouponCode\'));'),$coupons);
-            // echo json_encode($data);
-            return $this->renderAjax('filter', ['coupons' => $coupons]);
+            // var_dump($coupons);
+            // var_dump($choice);
+            header('Content-Type: application/json');
+            $data = array_map(create_function('$m','return $m->getAttributes(array(\'CouponID\', \'IsDeal\', \'CouponCode\', \'WebsiteID\'));'),$coupons);
+            // var_dump($data);
+            echo json_encode($data);
+            // return $this->renderAjax('filter', ['coupons' => $coupons]);
         }
     }
     public function actionExport2excel($choice, $vendorId, $categoryId) {

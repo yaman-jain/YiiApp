@@ -116,7 +116,7 @@ class Coupon extends \yii\db\ActiveRecord
                 ->with('website')
                 ->orderBy('CouponID')
                 ->limit(19); 
-        $coupons = clone $query; 
+        $coupons = clone $query;
         if ($choice === 1) // coupons 
         { 
             $coupons = $query->where("IsDeal=0");

@@ -40,11 +40,13 @@
                <div class="col-md-12">
                   <h4>FILTER BY VENDOR</h4>
                   <form role="form">
+                      
                      <div class="row">
                         <div class="col-md-12">
                            <input type="radio" id="Allvendors" value="Allvendors" name ="Vendors" onclick="checkCouponDeal()" checked="true"> All Vendors
                         </div>
                      </div>
+                      
                      <?php $counter = 0; foreach ($vendors as $vendor) { if ($counter < 5) {?>
                      <div class="row">
                         <div class="col-md-12">
@@ -62,11 +64,13 @@
                <div class="col-md-12">
                   <h4>FILTER BY CATEGORY</h4>
                   <form role="form">
-                     <div class="row">
+                    
+                      <div class="row">
                         <div class="col-md-12">
                            <input type="radio" id="Allcategories" value="Allcategories" name ="Categories" onclick="checkCouponDeal()" checked="true">All Categories
                         </div>
                      </div>
+                     
                      <?php $counter = 0; foreach ($categories as $category) { if ($counter < 5) {?>
                      <div class="row">
                         <div class="col-md-12">
@@ -87,8 +91,9 @@
          <div id="loading" align="center">
          </div>
          
-         <div id="offers_ajax" style="display:none;">
+         <div id="offers_ajax">
          </div>
+         
          
          <div id="offers">
             <?php foreach ($coupons as $coupon): ?>
@@ -97,7 +102,7 @@
                    <p><span>Coupon ID: </span>
                   <?= $coupon->CouponID ?>
                    </p>
-                  <p>Vendor : <b><?= Html::encode($coupon->website->WebsiteName); ?></b></p>
+                  <p>VendorID : <b><?= Html::encode($coupon->WebsiteID); ?></b></p>
                   
                   <?php if ($coupon->IsDeal == 1) { ?>
                   <h5>
