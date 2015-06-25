@@ -90,11 +90,6 @@
          
          <div id="loading" align="center">
          </div>
-         
-         <div id="offers_ajax">
-         </div>
-         
-         
          <div id="offers">
             <?php foreach ($coupons as $coupon): ?>
             <div class="thumbnail">

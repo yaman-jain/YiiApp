@@ -1,16 +1,18 @@
 
 "use strict";
 var ajaxWrapper = function(choice, vendorId, categoryId) {
+    if (vendorId === "Allvendors" && categoryId === "Allcategories") {
+        $('#offers').show();
+    }
     $.ajax({
         type: 'GET',
         beforeSend: function() {
             $("#loading").fadeIn();
         },
         url: "index.php?r=coupon/filter&choice=" + choice + "&vendor_id=" + vendorId + "&category_id=" + categoryId,
-        dataType: "html",
+        dataType: "json",
         data: {},
         success: function(data) {
-            data = JSON.parse(data);
             if (data) {
                 var len = data.length,
                     txt = "";
@@ -18,27 +20,14 @@ var ajaxWrapper = function(choice, vendorId, categoryId) {
                     txt = "<p><h4>Currently, No Coupons/Deals are Available Stay tuned</h4></p>";
                 } else {
                     for (var i = 0; i < len; i++) {
-                        alert(choice);
                         if (choice === 2 || choice === 3) {
                             if (data[i]['IsDeal'] === 1) {
-                                txt += "<div class=\"thumbnail\">";
-                                txt += "<div class=\"caption\">";
-                                txt += "<p><span>Coupon ID: </span>";
-                                txt += data[i]["CouponID"];
-                                txt += "</p>";
-                                txt += "<p>VendorID : <b>" + data[i]['WebsiteID'] + "</b></p>";
-                                txt += "<h5>ACTIVATE DEAL :" + data[i]['IsDeal'] + "</h5></div></div>";
+                                txt += "<div class=\"thumbnail\">" + "<div class=\"caption\">" + "<p><span>Coupon ID: </span>" + data[i]["CouponID"] + "</p>" + "<p>VendorID : <b>" + data[i]['WebsiteID'] + "</b></p>" + "<h5>ACTIVATE DEAL :" + data[i]['IsDeal'] + "</h5></div></div>";
                             }
                         }
                         if (choice === 1 || choice === 3) {
                             if (data[i]['IsDeal'] === 0) {
-                                txt += "<div class=\"thumbnail\">";
-                                txt += "<div class=\"caption\">";
-                                txt += "<p><span>Coupon ID: </span>";
-                                txt += data[i]["CouponID"];
-                                txt += "</p>";
-                                txt += "<p>VendorID : <b>" + data[i]['WebsiteID'] + "</b></p>";
-                                txt += "<h5>Coupon Code :" + data[i]['CouponCode'] + "</h5></div></div>";
+                                txt += "<div class=\"thumbnail\">" + "<div class=\"caption\">" + "<p><span>Coupon ID: </span>" + data[i]["CouponID"] + "</p>" + "<p>VendorID : <b>" + data[i]['WebsiteID'] + "</b></p>" + "<h5>Coupon Code :" + data[i]['CouponCode'] + "</h5></div></div>";
                             }
                         }
                     }
@@ -64,13 +53,8 @@ var checkCouponDeal = function() {
     $('#loading').html('<img src="images/money.GIF">');
     if ((couponCheck && dealCheck) || !(couponCheck || dealCheck)) {
         //both deals and coupons
-        if (vendorId === "Allvendors" && categoryId === "Allcategories") {
-            $("#loading").fadeIn();
-            $('#offers').show();
-            $("#loading").fadeOut();
-        } else {
-            ajaxWrapper(3, vendorId, categoryId);
-        }
+        ajaxWrapper(3, vendorId, categoryId);
+    
     } else if (couponCheck && !dealCheck) {
         ajaxWrapper(1, vendorId, categoryId);
     } else {
