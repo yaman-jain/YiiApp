@@ -1,8 +1,5 @@
 "use strict";
 var ajaxWrapper = function(choice, vendorId, categoryId) {
-  if (vendorId === "Allvendors" && categoryId === "Allcategories") {
-    $('#offers').show();
-  }
   $.ajax({
     type: 'GET',
     beforeSend: function() {

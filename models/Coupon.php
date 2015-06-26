@@ -115,13 +115,13 @@ class Coupon extends \yii\db\ActiveRecord
                 ->joinWith('couponCategories')
                 ->with('website')
                 ->orderBy('CouponID')
-                ->limit(19); 
+                ->limit(1000); 
         $coupons = clone $query;
-        if ($choice === 1) // coupons 
+        if ($choice === "1") // coupons 
         { 
             $coupons = $query->where("IsDeal=0");
         } 
-        elseif ($choice === 2) // deals 
+        elseif ($choice === "2") // deals 
         { 
             $coupons = $query->where("IsDeal=1");
         }
@@ -140,3 +140,4 @@ class Coupon extends \yii\db\ActiveRecord
         return $coupons->all();
     }
 }
+
