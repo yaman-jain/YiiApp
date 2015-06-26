@@ -97,7 +97,7 @@
                    <p><span>Coupon ID: </span>
                   <?= $coupon->CouponID ?>
                    </p>
-                  <p>VendorID : <b><?= Html::encode($coupon->WebsiteID); ?></b></p>
+                  <p>Vendor Name : <b><?= Html::encode($coupon->website->WebsiteName); ?></b></p>
                   
                   <?php if ($coupon->IsDeal == 1) { ?>
                   <h5>

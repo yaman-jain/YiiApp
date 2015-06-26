@@ -13,6 +13,7 @@ var ajaxWrapper = function(choice, vendorId, categoryId) {
     dataType: "json",
     data: {},
     success: function(data) {
+      // console.log(data);
       if (data) {
         var len = data.length,
           txt = "";
@@ -26,7 +27,7 @@ var ajaxWrapper = function(choice, vendorId, categoryId) {
                 txt += "<div class=\"thumbnail\">" +
                   "<div class=\"caption\">" +
                   "<p><span>Coupon ID: </span>" + data[i]["CouponID"] +
-                  "</p><p>VendorID : <b>" + data[i]['WebsiteID'] +
+                  "</p><p>Vendor Name : <b>" + data[i]['WebsiteName'] +
                   "</b></p><h5>ACTIVATE DEAL :" + data[i]['IsDeal'] +
                   "</h5></div></div>";
               }
@@ -36,7 +37,7 @@ var ajaxWrapper = function(choice, vendorId, categoryId) {
                 txt += "<div class=\"thumbnail\">" +
                   "<div class=\"caption\">" +
                   "<p><span>Coupon ID: </span>" + data[i]["CouponID"] +
-                  "</p><p>VendorID : <b>" + data[i]['WebsiteID'] +
+                  "</p><p>Vendor Name : <b>" + data[i]['WebsiteName'] +
                   "</b></p><h5>Coupon Code :" + data[i]['CouponCode'] + "</h5></div></div>";
               }
             }

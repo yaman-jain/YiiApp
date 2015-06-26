@@ -52,13 +52,15 @@ class CouponController extends Controller {
         $request = Yii::$app->request;
         if ($request->isAjax) {
             $coupons = Coupon::getCouponsBasedOnFilters($request->get('choice'), $request->get('vendor_id'), $request->get('category_id'));
-            // var_dump($coupons);
-            // var_dump($choice);
+            $data = array();
+            foreach ($coupons as $coupon) {
+                array_push($data, array('CouponID' => $coupon->CouponID,
+                    'IsDeal' => $coupon->IsDeal,
+                    'CouponCode' => $coupon->CouponCode,
+                    'WebsiteName' => $coupon->website->WebsiteName));
+            }
             header('Content-Type: application/json');
-            $data = array_map(create_function('$m','return $m->getAttributes(array(\'CouponID\', \'IsDeal\', \'CouponCode\', \'WebsiteID\'));'),$coupons);
-            // var_dump($data);
             echo json_encode($data);
-            // return $this->renderAjax('filter', ['coupons' => $coupons]);
         }
     }
     public function actionExport2excel() {
