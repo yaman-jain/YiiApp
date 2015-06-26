@@ -48,11 +48,10 @@ class CouponController extends Controller {
         Yii::app()->end();
     }
     */
-    public function actionFilter($choice, $vendor_id, $category_id) {
-        if (Yii::$app->request->isAjax) { 
-            $coupons = Coupon::getCouponsBasedOnFilters($choice, $vendor_id, $category_id);
-            
-            // This is a JSON Approach Blocker:
+    public function actionFilter() {
+        $request = Yii::$app->request;
+        if ($request->isAjax) {
+            $coupons = Coupon::getCouponsBasedOnFilters($request->get('choice'), $request->get('vendor_id'), $request->get('category_id'));
             // var_dump($coupons);
             // var_dump($choice);
             header('Content-Type: application/json');
@@ -62,12 +61,13 @@ class CouponController extends Controller {
             // return $this->renderAjax('filter', ['coupons' => $coupons]);
         }
     }
-    public function actionExport2excel($choice, $vendorId, $categoryId) {
+    public function actionExport2excel() {
         /*
          * Export data to Excel 
          * for reference : https://github.com/PHPOffice/PHPExcel
          */
-        $coupons = Coupon::getCouponsBasedOnFilters($choice, $vendorId, $categoryId);
+        $request = Yii::$app->request;
+        $coupons = Coupon::getCouponsBasedOnFilters($request->get('choice'), $request->get('vendorId'), $request->get('categoryId'));
         $objPHPExcel = new PHPExcel(); //make a new object of the php excel
         $sheet = 0; //start on sheet zero
 
