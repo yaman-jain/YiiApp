@@ -67,7 +67,7 @@ class CouponController extends Controller {
          * for reference : https://github.com/PHPOffice/PHPExcel
          */
         $request = Yii::$app->request;
-        $coupons = Coupon::getCouponsBasedOnFilters($request->get('choice'), $request->get('vendorId'), $request->get('categoryId'));
+        $coupons = Coupon::getCouponsBasedOnFilters($request->get('choice'), $request->get('vendor_id'), $request->get('category_id'));
         $objPHPExcel = new PHPExcel(); //make a new object of the php excel
         $sheet = 0; //start on sheet zero
 

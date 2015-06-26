@@ -62,7 +62,7 @@ var checkCouponDeal = function() {
   var couponCheck = $("#couponscheck").is(":checked"),
     dealCheck = $("#dealscheck").is(":checked"),
     vendorId = $('input:radio[name="Vendors"]:checked').val(),
-    categoryId = $('input:radio[name="Categories"]:checked').val()
+    categoryId = $('input:radio[name="Categories"]:checked').val();
   $('#loading').html('<img src="images/money.GIF">');
   if ((couponCheck && dealCheck) || !(couponCheck || dealCheck)) {
     ajaxWrapper(3, vendorId, categoryId);
